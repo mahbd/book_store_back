@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from dj_rest_auth.serializers import UserDetailsSerializer
 from rest_framework import serializers
 
 User = get_user_model()
@@ -36,3 +37,8 @@ class RegisterSerializer(serializers.ModelSerializer):
         user_obj.set_password(password)
         user_obj.save()
         return user_obj
+
+
+class CustomUserDetailsSerializer(UserDetailsSerializer):
+    class Meta(UserDetailsSerializer.Meta):
+        fields = ['id', 'username', 'email', 'first_name', 'last_name', 'image', 'is_superuser']
