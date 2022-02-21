@@ -28,3 +28,12 @@ class CartAdmin(admin.ModelAdmin):
     list_filter = ('user',)
     search_fields = ('user', 'item')
     list_per_page = 25
+
+
+@admin.register(Order)
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ('id', 'user', 'item', 'quantity', 'total_price', 'status', 'created_at')
+    list_display_links = ('id', 'user', 'item')
+    list_filter = ('user',)
+    search_fields = ('user', 'item')
+    list_per_page = 25
