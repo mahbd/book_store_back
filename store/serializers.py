@@ -37,6 +37,10 @@ class WishListSerializer(serializers.ModelSerializer):
         model = WishList
         fields = ('id', 'user', 'item')
 
+        extra_kwargs = {
+            'user': {'read_only': True},
+        }
+
     def validate(self, data):
         user = self.context['request'].user
         data['user'] = user
@@ -47,6 +51,9 @@ class CartSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cart
         fields = ('id', 'user', 'item', 'quantity')
+        extra_kwargs = {
+            'user': {'read_only': True},
+        }
 
     def validate(self, data):
         user = self.context['request'].user
@@ -58,6 +65,9 @@ class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
         fields = ('id', 'user', 'item', 'quantity', 'total_price', 'status', 'created_at')
+        extra_kwargs = {
+            'user': {'read_only': True},
+        }
 
     def validate(self, data):
         user = self.context['request'].user
