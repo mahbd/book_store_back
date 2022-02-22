@@ -37,14 +37,29 @@ class WishListSerializer(serializers.ModelSerializer):
         model = WishList
         fields = ('id', 'user', 'item')
 
+    def validate(self, data):
+        user = self.context['request'].user
+        data['user'] = user
+        return data
+
 
 class CartSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cart
         fields = ('id', 'user', 'item', 'quantity')
 
+    def validate(self, data):
+        user = self.context['request'].user
+        data['user'] = user
+        return data
+
 
 class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
         fields = ('id', 'user', 'item', 'quantity', 'total_price', 'status', 'created_at')
+
+    def validate(self, data):
+        user = self.context['request'].user
+        data['user'] = user
+        return data
